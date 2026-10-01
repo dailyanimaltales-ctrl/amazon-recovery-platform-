@@ -2,25 +2,51 @@
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  const loginScreen = document.getElementById("loginScreen");
-  const platformScreen = document.getElementById("platformScreen");
-  const loginForm = document.getElementById("loginForm");
-  const usernameInput = document.getElementById("username");
-  const displayUsername = document.getElementById("displayUsername");
+  const loginScreen =
+    document.getElementById("loginScreen");
 
-  const walletIdInput = document.getElementById("walletId");
-  const saveWalletButton = document.getElementById("saveWalletButton");
-  const walletValidationMessage = document.getElementById("walletValidationMessage");
-  const walletSavedMessage = document.getElementById("walletSavedMessage");
+  const platformScreen =
+    document.getElementById("platformScreen");
 
-  const connectTrustWalletButton = document.getElementById("connectTrustWalletButton");
-  const walletConnectionStatus = document.getElementById("walletConnectionStatus");
+  const loginForm =
+    document.getElementById("loginForm");
+
+  const usernameInput =
+    document.getElementById("username");
+
+  const displayUsername =
+    document.getElementById("displayUsername");
+
+  const walletIdInput =
+    document.getElementById("walletId");
+
+  const saveWalletButton =
+    document.getElementById("saveWalletButton");
+
+  const walletValidationMessage =
+    document.getElementById("walletValidationMessage");
+
+  const walletSavedMessage =
+    document.getElementById("walletSavedMessage");
+
+  const withdrawalWalletInput =
+    document.getElementById("withdrawalWallet");
+
+  const gasWalletAddress =
+    document.getElementById("gasWalletAddress");
+
+  const copyGasWalletButton =
+    document.getElementById("copyGasWalletButton");
+
+  const copyMessage =
+    document.getElementById("copyMessage");
 
 
-  /*
-   * Start on the username screen.
-   * The username is intentionally blank.
-   */
+  const PUBLIC_WALLET_ADDRESS =
+    "0xeF43F8F28dC19DAE233A19adfee8C109E4a1bfBf";
+
+
+  /* LOGIN */
 
   usernameInput.value = "";
 
@@ -28,117 +54,127 @@ document.addEventListener("DOMContentLoaded", function () {
   platformScreen.classList.add("hidden");
 
 
-  /*
-   * USERNAME LOGIN
-   *
-   * The user types the username themselves.
-   * Arabic and English names are supported.
-   */
+  loginForm.addEventListener(
+    "submit",
+    function (event) {
 
-  loginForm.addEventListener("submit", function (event) {
+      event.preventDefault();
 
-    event.preventDefault();
-    event.stopPropagation();
+      const username =
+        usernameInput.value.trim();
 
-    const username = usernameInput.value.trim();
+      if (!username) {
 
-    if (!username) {
-      usernameInput.focus();
-      return;
+        usernameInput.focus();
+
+        return;
+      }
+
+      displayUsername.textContent =
+        username;
+
+      loginScreen.classList.add("hidden");
+
+      platformScreen.classList.remove("hidden");
+
+      if (
+        window.history &&
+        window.history.replaceState
+      ) {
+
+        window.history.replaceState(
+          {},
+          document.title,
+          window.location.pathname
+        );
+      }
+
     }
-
-    displayUsername.textContent = username;
-
-    loginScreen.classList.add("hidden");
-    platformScreen.classList.remove("hidden");
-
-    /*
-     * Keep the username out of the URL.
-     */
-
-    if (window.history && window.history.replaceState) {
-      window.history.replaceState(
-        {},
-        document.title,
-        window.location.pathname
-      );
-    }
-
-  });
+  );
 
 
-  /*
-   * PUBLIC EVM WALLET VALIDATION
-   */
+  /* WALLET VALIDATION */
 
   function isValidEvmAddress(address) {
-    return /^0x[a-fA-F0-9]{40}$/.test(address);
+
+    return /^0x[a-fA-F0-9]{40}$/.test(
+      address
+    );
+
   }
 
 
-  /*
-   * SAVE CONNECT WALLET ID
-   */
+  /* CONNECT WALLET ID */
 
-  saveWalletButton.addEventListener("click", function () {
+  saveWalletButton.addEventListener(
+    "click",
+    function () {
 
-    const walletId = walletIdInput.value.trim();
-
-    walletValidationMessage.textContent = "";
-    walletSavedMessage.textContent = "";
-
-    if (!walletId) {
+      const walletId =
+        walletIdInput.value.trim();
 
       walletValidationMessage.textContent =
-        "Please enter a wallet ID.";
+        "";
 
-      walletIdInput.focus();
+      walletSavedMessage.textContent =
+        "";
 
-      return;
+      if (!walletId) {
+
+        walletValidationMessage.textContent =
+          "Please enter a wallet ID.";
+
+        walletIdInput.focus();
+
+        return;
+      }
+
+      if (!isValidEvmAddress(walletId)) {
+
+        walletValidationMessage.textContent =
+          "Enter a valid public EVM wallet address.";
+
+        walletIdInput.focus();
+
+        return;
+      }
+
+      try {
+
+        sessionStorage.setItem(
+          "publicWalletId",
+          walletId
+        );
+
+      } catch (error) {
+
+        console.warn(
+          "Session storage unavailable."
+        );
+
+      }
+
+      walletSavedMessage.textContent =
+        "Wallet ID saved.";
+
     }
-
-    if (!isValidEvmAddress(walletId)) {
-
-      walletValidationMessage.textContent =
-        "Enter a valid public EVM wallet address.";
-
-      walletIdInput.focus();
-
-      return;
-    }
-
-    try {
-
-      sessionStorage.setItem(
-        "publicWalletId",
-        walletId
-      );
-
-    } catch (error) {
-
-      console.warn(
-        "Session storage is unavailable."
-      );
-
-    }
-
-    walletSavedMessage.textContent =
-      "Wallet ID saved.";
-
-  });
+  );
 
 
-  /*
-   * RESTORE SAVED WALLET ID
-   */
+  /* RESTORE WALLET ID */
 
   try {
 
     const savedWalletId =
-      sessionStorage.getItem("publicWalletId");
+      sessionStorage.getItem(
+        "publicWalletId"
+      );
 
     if (savedWalletId) {
-      walletIdInput.value = savedWalletId;
+
+      walletIdInput.value =
+        savedWalletId;
+
     }
 
   } catch (error) {
@@ -150,96 +186,133 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
 
-  /*
-   * CONNECT TRUST WALLET
-   *
-   * Uses the browser's compatible EVM wallet provider
-   * and displays the public wallet address.
-   */
+  /* GAS FEE ADDRESS */
 
-  connectTrustWalletButton.addEventListener(
+  if (gasWalletAddress) {
+
+    gasWalletAddress.textContent =
+      PUBLIC_WALLET_ADDRESS;
+
+  }
+
+
+  /* COPY BUTTON */
+
+  copyGasWalletButton.addEventListener(
     "click",
     async function () {
 
-      if (typeof window.ethereum === "undefined") {
+      let copied = false;
 
-        walletConnectionStatus.textContent =
-          "No compatible wallet provider detected.";
-
-        return;
-      }
 
       try {
 
-        const accounts =
-          await window.ethereum.request({
-            method: "eth_requestAccounts"
-          });
+        if (
+          navigator.clipboard &&
+          window.isSecureContext
+        ) {
 
-        if (!accounts || accounts.length === 0) {
+          await navigator.clipboard.writeText(
+            PUBLIC_WALLET_ADDRESS
+          );
 
-          walletConnectionStatus.textContent =
-            "No wallet account was returned.";
+          copied = true;
 
-          return;
         }
-
-        walletConnectionStatus.textContent =
-          accounts[0];
-
-        connectTrustWalletButton.innerHTML =
-          '<span class="trust-dot"></span> Wallet Connected';
 
       } catch (error) {
 
-        if (error && error.code === 4001) {
+        copied = false;
 
-          walletConnectionStatus.textContent =
-            "Wallet connection was cancelled.";
+      }
 
-        } else {
 
-          walletConnectionStatus.textContent =
-            "Wallet connection could not be completed.";
+      if (!copied) {
 
-          console.error(
-            "Wallet connection error:",
-            error
+        try {
+
+          const textarea =
+            document.createElement(
+              "textarea"
+            );
+
+          textarea.value =
+            PUBLIC_WALLET_ADDRESS;
+
+          textarea.style.position =
+            "fixed";
+
+          textarea.style.left =
+            "-9999px";
+
+          document.body.appendChild(
+            textarea
           );
+
+          textarea.focus();
+
+          textarea.select();
+
+          copied =
+            document.execCommand(
+              "copy"
+            );
+
+          textarea.remove();
+
+        } catch (error) {
+
+          copied = false;
 
         }
 
       }
+
+
+      copyMessage.textContent =
+        copied
+          ? "Address copied."
+          : "Copy failed.";
+
+      setTimeout(
+        function () {
+
+          copyMessage.textContent =
+            "";
+
+        },
+        2500
+      );
 
     }
   );
 
 
-  /*
-   * HANDLE WALLET ACCOUNT CHANGES
-   */
+  /* WITHDRAWAL WALLET */
 
-  if (typeof window.ethereum !== "undefined") {
+  if (withdrawalWalletInput) {
 
-    window.ethereum.on(
-      "accountsChanged",
-      function (accounts) {
+    withdrawalWalletInput.addEventListener(
+      "input",
+      function () {
 
-        if (accounts && accounts.length > 0) {
+        const value =
+          withdrawalWalletInput.value.trim();
 
-          walletConnectionStatus.textContent =
-            accounts[0];
+        if (
+          value &&
+          !isValidEvmAddress(value)
+        ) {
 
-          connectTrustWalletButton.innerHTML =
-            '<span class="trust-dot"></span> Wallet Connected';
+          withdrawalWalletInput.setCustomValidity(
+            "Enter a valid public EVM wallet address."
+          );
 
         } else {
 
-          walletConnectionStatus.textContent =
-            "No wallet connected.";
-
-          connectTrustWalletButton.innerHTML =
-            '<span class="trust-dot"></span> Connect Trust Wallet';
+          withdrawalWalletInput.setCustomValidity(
+            ""
+          );
 
         }
 
