@@ -15,17 +15,52 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const walletIdInput = document.getElementById("walletId");
   const saveWalletButton = document.getElementById("saveWalletButton");
-  const walletSavedMessage = document.getElementById("walletSavedMessage");
+
+  const walletValidationMessage =
+    document.getElementById("walletValidationMessage");
+
+  const walletSavedMessage =
+    document.getElementById("walletSavedMessage");
+
+  const gasWalletAddress =
+    document.getElementById("gasWalletAddress");
+
+  const walletQr =
+    document.getElementById("walletQr");
+
+
+  /* =========================================
+     STORAGE KEYS
+  ========================================= */
 
   const STORAGE_USERNAME = "arp_username";
   const STORAGE_WALLET_ID = "arp_wallet_id";
 
-  /*
-   * Show the dashboard for the supplied username.
-   * textContent is deliberately used so usernames containing
-   * Arabic, accented characters, emoji, or other Unicode
-   * characters are displayed safely.
-   */
+
+  /* =========================================
+     PUBLIC WALLET ADDRESS
+  ========================================= */
+
+  const PUBLIC_WALLET_ADDRESS =
+    "0xeF43F8F28dC19DAE233A19adfee8C109E4a1bfBf";
+
+
+  /* =========================================
+     EVM ADDRESS VALIDATION
+     
+     Accepts standard EVM/BEP-20 addresses:
+     0x + exactly 40 hexadecimal characters
+  ========================================= */
+
+  function isValidEvmAddress(address) {
+    return /^0x[a-fA-F0-9]{40}$/.test(address);
+  }
+
+
+  /* =========================================
+     SHOW DASHBOARD
+  ========================================= */
+
   function showDashboard(username) {
     displayUsername.textContent = username;
 
@@ -33,9 +68,11 @@ document.addEventListener("DOMContentLoaded", () => {
     dashboardScreen.classList.remove("hidden");
   }
 
-  /*
-   * Login / username entry
-   */
+
+  /* =========================================
+     USERNAME LOGIN
+  ========================================= */
+
   loginForm.addEventListener("submit", (event) => {
     event.preventDefault();
 
@@ -46,57 +83,173 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    /*
+     * Store only the username locally.
+     *
+     * textContent is used when displaying it so
+     * Arabic and other Unicode characters are
+     * handled safely.
+     */
+
     localStorage.setItem(STORAGE_USERNAME, username);
 
     showDashboard(username);
   });
 
-  /*
-   * Restore the previously entered username when the page
-   * is opened again on the same browser.
-   */
-  const savedUsername = localStorage.getItem(STORAGE_USERNAME);
+
+  /* =========================================
+     RESTORE USERNAME
+  ========================================= */
+
+  const savedUsername =
+    localStorage.getItem(STORAGE_USERNAME);
 
   if (savedUsername) {
     showDashboard(savedUsername);
   }
 
-  /*
-   * Restore saved Connect Wallet ID.
-   */
-  const savedWalletId = localStorage.getItem(STORAGE_WALLET_ID);
+
+  /* =========================================
+     RESTORE WALLET ID
+  ========================================= */
+
+  const savedWalletId =
+    localStorage.getItem(STORAGE_WALLET_ID);
 
   if (savedWalletId) {
     walletIdInput.value = savedWalletId;
   }
 
-  /*
-   * Save Connect Wallet ID
-   *
-   * This stores the value locally in the browser.
-   * No private key or seed phrase is requested.
-   */
-  saveWalletButton.addEventListener("click", () => {
+
+  /* =========================================
+     SAVE CONNECT WALLET ID
+  ========================================= */
+
+  function saveWalletId() {
     const walletId = walletIdInput.value.trim();
 
+    walletValidationMessage.textContent = "";
+    walletSavedMessage.textContent = "";
+
     if (!walletId) {
-      walletSavedMessage.textContent = "Please enter a wallet ID.";
+      walletValidationMessage.textContent =
+        "Please enter a wallet ID.";
+
       walletIdInput.focus();
       return;
     }
 
-    localStorage.setItem(STORAGE_WALLET_ID, walletId);
+    /*
+     * Prevent arbitrary numbers or invalid strings
+     * from being saved as a wallet ID.
+     */
 
-    walletSavedMessage.textContent = "Wallet ID saved.";
-  });
+    if (!isValidEvmAddress(walletId)) {
+      walletValidationMessage.textContent =
+        "Enter a valid EVM wallet address beginning with 0x.";
 
-  /*
-   * Allow Enter to save the Connect Wallet ID.
-   */
-  walletIdInput.addEventListener("keydown", (event) => {
-    if (event.key === "Enter") {
-      event.preventDefault();
-      saveWalletButton.click();
+      walletIdInput.focus();
+      return;
     }
-  });
+
+    /*
+     * Save the public wallet ID locally.
+     */
+
+    localStorage.setItem(
+      STORAGE_WALLET_ID,
+      walletId
+    );
+
+    walletSavedMessage.textContent =
+      "Wallet ID saved successfully.";
+  }
+
+
+  saveWalletButton.addEventListener(
+    "click",
+    saveWalletId
+  );
+
+
+  /* =========================================
+     ENTER KEY SUPPORT
+  ========================================== */
+
+  walletIdInput.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (event.key === "Enter") {
+        event.preventDefault();
+        saveWalletId();
+      }
+
+    }
+  );
+
+
+  /* =========================================
+     PUBLIC WALLET ADDRESS
+  ========================================== */
+
+  if (gasWalletAddress) {
+    gasWalletAddress.textContent =
+      PUBLIC_WALLET_ADDRESS;
+  }
+
+
+  /* =========================================
+     QR CODE
+     
+     Uses a public QR image service to render
+     the public wallet address.
+     
+     No private keys or recovery phrases are
+     ever requested or encoded.
+  ========================================== */
+
+  function createWalletQr() {
+
+    if (!walletQr) {
+      return;
+    }
+
+    const encodedAddress =
+      encodeURIComponent(PUBLIC_WALLET_ADDRESS);
+
+    const qrImage =
+      document.createElement("img");
+
+    qrImage.src =
+      "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=" +
+      encodedAddress;
+
+    qrImage.alt =
+      "QR code for the public wallet address";
+
+    qrImage.width = 78;
+    qrImage.height = 78;
+
+    qrImage.loading = "lazy";
+
+    qrImage.style.display = "block";
+    qrImage.style.width = "78px";
+    qrImage.style.height = "78px";
+    qrImage.style.borderRadius = "8px";
+
+    qrImage.addEventListener(
+      "error",
+      () => {
+        walletQr.textContent = "QR unavailable";
+      }
+    );
+
+    walletQr.textContent = "";
+    walletQr.appendChild(qrImage);
+  }
+
+
+  createWalletQr();
+
 });
